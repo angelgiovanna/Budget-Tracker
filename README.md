@@ -19,7 +19,7 @@ SO THAT my account balance is accurate when I am traveling
 * THEN the deposits or expenses added while they were offline are added to their transaction history and their totals are updated
 
 # Screenshots
-
+![budget](https://user-images.githubusercontent.com/96391351/176541172-27824976-465c-4b52-99ba-ad1e960eb994.png)
 
 # Contact Me 
 * Email: aescobar2045@gmail.com
