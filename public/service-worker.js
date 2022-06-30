@@ -47,27 +47,17 @@ self.addEventListener('activate', function(e) {
     );
 });
 
-self.addEventListener("fetch", function (e) {
-    console.log("fetch request : " + e.request.url);
-    if (e.request.url.includes("/api/")) {
-      caches
-        .open(CACHE_NAME)
-        .then((cache) => {
-          return (
-            fetch(e.request)
-              .then((response) => {
-                if (response.status === 200) {
-                  cache.put(e.request.url, response.clone());
-                }
-                return response;
-              })
-              .catch((error) => {
-                return cache.match(e.request);
-              })
-          );
+self.addEventListener('fetch', function (e) {
+    console.log('fetch request : ' + e.request.url)
+    e.respondWith(
+        caches.match(e.request).then(function (request) {
+            if (request) {
+                console.log('responding with cache : ' + e.request.url);
+                return request
+            } else {
+                console('file is not cached, fetching : ' + e.request.url);
+                return fetch(e.request);
+            }
         })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
+    );
 });
